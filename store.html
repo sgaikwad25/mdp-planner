@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store - Mini Dream Planner</title>
+
+    <!-- Custom CSS Stylesheet -->
+    <link href="./assets/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Font Family -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&family=Poppins:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="./assets/slick/slick.css" />
+    <link rel="stylesheet" href="./assets/slick/slick-theme.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <div class="w-full h-28 flex absolute w-full bg-transparent z-20 border-b border-white-100 sd:h-auto">
+      <div x-data="{ open: false }" class="flex flex-col w-90 mx-auto md:items-center md:justify-between md:flex-row">
+
+        <div class="p-4 sd:px-0 tablet:w-full flex flex-row items-center justify-between tablet:px-0">
+          <a href="/"><img src="/images/logo.png" class="w-32 sd:w-24 tablet:w-24 laptop:w-24" alt="MDP Logo"></a>
+          <button class="lg:hidden rounded-lg relative z-40" @click="open = !open">
+            <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6 text-white">
+              <path x-show="!open" fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                clip-rule="evenodd"></path>
+              <path x-show="open" fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+
+        <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow items-center gap-16 pb-4 
+      sd:absolute sd:justify-center sd:inset-0 sd:gap-3 sd:h-screen sd:z-30 sd:bg-white-102 sd:backdrop-blur-md
+      tablet:absolute tablet:justify-center tablet:inset-0 tablet:gap-3 tablet:h-screen tablet:z-30 tablet:bg-white-102 tablet:backdrop-blur-md
+      laptop:gap-8 md:pb-0 md:flex md:justify-end md:flex-row">
+
+          <a class="text-sm-15 tracking-1.8 py-2 pr-4 pl-3 text-white hover:text-orange-20 duratio-400 md:bg-transparent md:p-0 uppercase sd:font-semibold tablet:font-semibold"
+            href="/">Homepage</a>
+
+          <a class="text-sm-15 tracking-1.8 py-2 pr-4 pl-3 text-white hover:text-orange-20 duratio-400 md:bg-transparent md:p-0 uppercase sd:font-semibold tablet:font-semibold"
+            href="aboutus.html">about us</a>
+
+          <div @click.away="open = false" class="relative" x-data="{ open: false }">
+            <button @click="open = !open"
+              class="flex flex-row items-center w-full text-sm-15 tracking-1.8 py-2 pr-4 pl-3 text-white hover:text-orange-20 duratio-400 md:bg-transparent md:p-0 uppercase sd:font-semibold tablet:font-semibold">
+              <span>our services</span>
+              <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+                class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                <path fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <div x-show="open" x-transition:enter="transition ease-out duration-100"
+              x-transition:enter-start="transform opacity-0 scale-95"
+              x-transition:enter-end="transform opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-75"
+              x-transition:leave-start="transform opacity-100 scale-100"
+              x-transition:leave-end="transform opacity-0 scale-95"
+              class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+              <div class="px-2 py-2 bg-white-100 backdrop-blur-xs rounded-lg shadow dark-mode:bg-gray-800">
+                <a class="block tracking-widest text-white px-4 py-2 mt-2 text-sm-15 rounded font-medium uppercase hover:bg-orange-20 hover:text-white"
+                  href="#">Our Service 1</a>
+                <a class="block tracking-widest text-white px-4 py-2 mt-2 text-sm-15 rounded font-medium uppercase hover:bg-orange-20 hover:text-white"
+                  href="#">Our Service 2</a>
+                <a class="block tracking-widest text-white px-4 py-2 mt-2 text-sm-15 rounded font-medium uppercase hover:bg-orange-20 hover:text-white"
+                  href="#">Our Service 3</a>
+              </div>
+            </div>
+          </div>
+
+          <a class="text-sm-15 tracking-1.8 py-2 pr-4 pl-3 text-white hover:text-orange-20 duratio-400 md:bg-transparent md:p-0 uppercase sd:font-semibold tablet:font-semibold"
+            href="gallery.html">gallery</a>
+
+          <a class=" text-sm tracking-1.8 bg-gradient-to-r from-orange-20 to-orange-30 rounded-40 px-4 py-3.5 hover:bg-transparent text-white uppercase sd:font-semibold tablet:font-semibold"
+            href="contactus.html">Contact us</a>
+
+        </nav>
+      </div>
+    </div>
+
+    <!-- Banner -->
+    <div id="prasad" class="bg-cover bg-no-repeat h-64 relative"
+      style="background-image: url('./images/other-business/ob-bg.png')">
+      <div class="container mx-auto">
+        <div
+          class="w-6/12 sd:w-auto absolute left-14 bottom-24 z-1 sd:bottom-12 sd:left-8 sd:pr-2.5 tablet:bottom-12 laptop:bottom-24">
+          <h1 class="mb-0 text-6xl font-bold text-white tracking-widest uppercase leading-90 mb-1 sd:text-32 sd:leading-42 sd:mb-3
+          tablet:left-8 tablet:text-5xl tablet:pr-8 tablet:leading-60 laptop:text-5xl laptop:leading-60">
+            Store Page & <br>Products
+          </h1>
+          <p class="text-white font-extralight text-base-17 tracking-wider mb-0 sd:text-sm">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis,
+            pulvinar dapibus leo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Section -->
+    <section class="pt-12 pb-5 mx-auto sd:w-90 tablet:w-94 laptop:w-94 laptop:py-8 laptop:pb-16">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-store sd:grid-cols-1 sd:gap-y-8">
+          <div>
+            <h4 class="text-22 font-semibold mb-5">Filters</h4>
+
+            <div class="grid grid-cols-1 sd:grid-cols-2 sd:gap-2">
+              <!-- Product List -->
+              <div class="mb-12">
+                <p class="text-grayscale-101 text-base font-semibold mb-5">Product type</p>
+                <div class="flex items-center mb-3">
+                  <input id="furniture-checkbox" type="checkbox" value="Furniture"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent focus:transparent">
+                  <label for="furniture-checkbox"
+                    class="ml-2 text-base font-normal text-grayscale-101">Furniture</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="homeware-checkbox" type="checkbox" value="Homeware"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="homeware-checkbox" class="ml-2 text-base font-normal text-grayscale-101">Homeware</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="sofas-checkbox" type="checkbox" value="Sofas"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="sofas-checkbox" class="ml-2 text-base font-normal text-grayscale-101">Sofas</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input checked id="homeware-checkbox" type="checkbox" value="Homeware"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="homeware-checkbox" class="ml-2 text-base font-normal text-grayscale-101">Homeware</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="light-checkbox" type="checkbox" value="Light fittings"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="light-checkbox" class="ml-2 text-base font-normal text-grayscale-101">Light
+                    fittings</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="accessories-checkbox" type="checkbox" value="Accessories"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="accessories-checkbox"
+                    class="ml-2 text-base font-normal text-grayscale-101">Accessories</label>
+                </div>
+              </div>
+              <!-- Price -->
+              <div class="mb-12">
+                <h3 class="text-grayscale-101 text-base font-semibold mb-5">Price</h3>
+
+                <div class="flex items-center mb-3">
+                  <input id="one-checkbox" type="checkbox" value="one"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent focus:transparent">
+                  <label for="one-checkbox" class="ml-2 text-base font-normal text-grayscale-101">0 - 100</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="two-checkbox" type="checkbox" value="two"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="two-checkbox" class="ml-2 text-base font-normal text-grayscale-101">101 - 250</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="three-checkbox" type="checkbox" value="three"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="three-checkbox" class="ml-2 text-base font-normal text-grayscale-101">250 +</label>
+                </div>
+              </div>
+              <!-- Designer -->
+              <div>
+                <p class="text-grayscale-101 text-base font-semibold mb-5">Designer</p>
+
+                <div class="flex items-center mb-3">
+                  <input id="robert-checkbox" type="checkbox" value="robert"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent focus:transparent">
+                  <label for="robert-checkbox" class="ml-2 text-base font-normal text-grayscale-101">Robert
+                    Smith</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="liam-checkbox" type="checkbox" value="liam"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="liam-checkbox" class="ml-2 text-base font-normal text-grayscale-101">Liam
+                    Gallagher</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="biggie-checkbox" type="checkbox" value="biggie"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="biggie-checkbox" class="ml-2 text-base font-normal text-grayscale-101">Biggie
+                    Smalls</label>
+                </div>
+                <div class="flex items-center mb-3">
+                  <input id="thom-checkbox" type="checkbox" value="thom"
+                    class="w-4 h-4 text-orange-10 bg-orange-10 rounded border-grayscale-102 focus:transparent dark:focus:transparent dark:transparent focus:transparent dark:bg-gray-700 dark:border-gray-600">
+                  <label for="thom-checkbox" class="ml-2 text-base font-normal text-grayscale-101">Thom Yorke</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-y-14 sd:grid-cols-1 sd:gap-y-8 sd:place-items-center tablet:grid-cols-2 ">
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-1.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p><span
+                      class="text-grayscale-103 text-10 font-medium pt-2"><s>$200</s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-2.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p><span
+                      class="text-grayscale-103 text-10 font-medium pt-2"><s>$200</s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-3.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p><span
+                      class="text-grayscale-103 text-10 font-medium pt-2"><s>$200</s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-4.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p><span
+                      class="text-grayscale-103 text-10 font-medium pt-2"><s>$200</s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-5.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p><span
+                      class="text-grayscale-103 text-10 font-medium pt-2"><s>$200</s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-6.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p><span
+                      class="text-grayscale-103 text-10 font-medium pt-2"><s>$200</s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-7.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p><span
+                      class="text-grayscale-103 text-10 font-medium pt-2"><s>$200</s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-8.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p><span
+                      class="text-grayscale-103 text-10 font-medium pt-2"><s>$200</s></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="max-w-store-card bg-white rounded-20 border-0 border-gray-200 shadow-box-25 relative z-10">
+              <a href="#">
+                <img class="rounded-t-lg" src="./images/store/store-9.png" width="w-full h-full" alt="Store Image" />
+              </a>
+              <a href="#" class="absolute z-20 top-4 right-4 cursor-pointer">
+                <img src="./images/svgs/share-icon.svg" class="w-auto" alt="Image">
+              </a>
+              <div class="px-4 pt-4 pb-22">
+                <div class="flex justify-between ">
+                  <div>
+                    <a href="#">
+                      <h5 class="mb-1 text-base leading-24 font-bold tracking-tight text-gray-900 capitalize">product
+                        name
+                      </h5>
+                    </a>
+                    <p class="mb-2 font-light text-grayscale-103 text-sm">best of the best</p>
+                  </div>
+                  <span><i
+                      class="fa-regular fa-bookmark py-2 px-2.5 cursor-pointer border-0 rounded-40 shadow-box-30"></i></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <ul class="flex justify-center">
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                      <li class="cursor-pointer">
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"
+                          class="w-4 text-yellow-500" role="img" xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 576 512">
+                          <path fill="currentColor"
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                          </path>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-x-0.5">
+                    <p class="text-black-100 text-sm font-bold">$120</p>
+                    <span class="text-grayscale-103 text-10 font-medium pt-2">
+                      <s>$200</s>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div></div>
+            <div class="text-center">
+              <a href="#">
+                <button class="w-198 h-73 uppercase bg-orange-10 text-white tracking-wider text-sm-15 font-bold">
+                  see more
+                </button>
+              </a>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section class="bg-contain bg-no-repeat pt-12 pb-20 sd:bg-cover sd:bg-left tablet:bg-cover laptop:py-8 laptop:pb-16"
+      style="background-image: url('./images/homepage/subscribe-banner.jpg')">
+      <div class="container mx-auto laptop:w-90">
+        <div
+          class="grid grid-cols-contactform sd:grid-cols-1 sd:gap-4 tablet:grid-cols-1 tablet:gap-4 justify-center laptop:gap-12">
+          <div class="pt-5 sd:px-5 sd:py-0 tablet:pl-12">
+            <h2 class="text-5xl font-bold tracking-wider leading-68 uppercase font-bold text-black-200 mb-5 
+              sd:text-32 sd:leading-42 
+              tablet:text-40 tablet:leading-60
+              laptop:text-lg-4.5">
+              Have a project! <br />
+              Let’s discuss
+            </h2>
+            <p class="text-grayscale-20 text-base font-light mb-4 mt-2">
+              Thank you for getting in touch! <br />
+              Kindly. <br />
+              Fill the form, have a great day!
+            </p>
+            <div class="mt-7">
+              <p class="text-grayscale-101 text-base font-light mb-3">
+                <i class="fa-solid fa-location-dot text-base"></i>
+                &nbsp;&nbsp;&nbsp;Lumbung Hidup East Java
+              </p>
+              <p class="text-grayscale-101 text-base font-light mb-5">
+                <i class="fa-solid fa-envelope text-base"></i>
+                <a href="mailto:Hello@minidreamparty.com">&nbsp;&nbsp;Hello@minidreamparty.com</a>
+              </p>
+            </div>
+          </div>
+          <div class="pt-5 sd:px-5 tablet:px-5">
+            <form>
+              <div class="grid grid-cols-2 gap-y-10 gap-x-1.8 mb-10">
+                <div>
+                  <input type="text" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Your Name*" />
+                </div>
+                <div>
+                  <input type="email" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Your Email*" />
+                </div>
+                <div>
+                  <input type="text" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Phone Number*" />
+                </div>
+                <div>
+                  <select class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base">
+                    <option selected disabled>Event Type*</option>
+                    <option value="">Event Type 1</option>
+                    <option value="">Event Type 2</option>
+                    <option value="">Event Type 3</option>
+                    <option value="">Event Type 4</option>
+                    <option value="">Event Type 5</option>
+                  </select>
+                </div>
+                <div>
+                  <input type="text" placeholder="Event Date*" class="pb-1 w-full pointer bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 
+                    sd:text-base tablet:text-base laptop:text-base" onfocus="(this.type='date')" id="date" />
+                </div>
+                <div>
+                  <input type="text" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Venue Location" />
+                </div>
+                <div>
+                  <input type="text" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Your Address*" />
+                </div>
+                <div>
+                  <select class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base">
+                    <option selected disabled>Budget*</option>
+                    <option value="">Budget 1</option>
+                    <option value="">Budget 2</option>
+                    <option value="">Budget 3</option>
+                    <option value="">Budget 4</option>
+                    <option value="">Budget 5</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <textarea class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                  sd:text-base tablet:text-base laptop:text-base" rows="1" placeholder="Message*"></textarea>
+              </div>
+
+              <div class="text-right mt-5">
+                <button
+                  class="w-249 bg-orange-10 border-0 uppercase bg-orange-10 h-11 text-white tracking-wider font-semibold">
+                  submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-orange-10 pt-12 pb-5 sd:px-5 sd:pt-10 sd:pb-5 tablet:px-5 tablet:pt-10 tablet:pb-5">
+      <div class="container mx-auto laptop:w-90">
+        <div
+          class="grid grid-cols-footer gap-5 sd:grid-cols-1 tablet:grid-cols-2 tablet:gap-y-12 laptop:gap-0 laptop:grid-cols-footer1">
+          <div>
+            <a href="/">
+              <img src="./images/logo.png" class="w-28 h-auto mb-2" alt="Logo" />
+            </a>
+            <p class="text-white pt-3.5 text-base-17 font-light sd:text-base tablet:text-base  laptop:text-base">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea
+              dignissimos cumque maxime, vitae iusto debitis.
+            </p>
+            <ul class="inline-flex list-none p-0 mt-5">
+              <li class="mr-3">
+                <a href="" class="text-white text-3xl">
+                  <i class="fa-brands fa-square-facebook social-icons-img"></i></a>
+              </li>
+              <li class="mr-3">
+                <a href="" class="text-white text-3xl"><i class="fa-brands fa-square-twitter social-icons-img"></i></a>
+              </li>
+              <li class="mr-3">
+                <a href="" class="text-white text-3xl"><i
+                    class="fa-brands fa-square-instagram social-icons-img"></i></a>
+              </li>
+              <li>
+                <a href="" class="text-white text-3xl"><i class="fa-brands fa-linkedin social-icons-img"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="pl-12 sd:pl-0">
+            <h3 class="uppercase text-2xl font-extrabold tracking-wider text-white mb-5 sd:pt-4">
+              Navigation
+            </h3>
+            <ul class="footer-inner-ul ml-2">
+              <li class="mb-4 pl-3">
+                <a class="text-white text-base-17 font-light sd:text-base tablet:text-base" href="/">Homepage</a>
+              </li>
+              <li class="mb-4 pl-3">
+                <a class="text-white text-base-17 font-light sd:text-base tablet:text-base" href="aboutus.html">About
+                  Us</a>
+              </li>
+              <li class="mb-4 pl-3">
+                <a class="text-white text-base-17 font-light sd:text-base tablet:text-base"
+                  href="services.html">Services</a>
+              </li>
+              <li class="mb-4 pl-3">
+                <a class="text-white text-base-17 font-light sd:text-base tablet:text-base"
+                  href="gallery.html">Gallery</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="uppercase text-2xl font-extrabold tracking-wider text-white mb-5">
+              Contact Us
+            </h3>
+            <p class="text-white text-base-17 font-light mb-2 sd:text-base tablet:text-base">
+              <i class="fa-solid fa-location-dot text-base"></i>
+              &nbsp;&nbsp;&nbsp;Lumbung Hidup East Java
+            </p>
+            <p class="text-white text-base-17 font-light mb-5 sd:text-base tablet:text-base">
+              <i class="fa-solid fa-envelope text-base"></i>
+              <a href="mailto:Hello@minidreamparty.com">&nbsp;&nbsp;Hello@minidreamparty.com</a>
+            </p>
+
+            <form class="subscribe-form">
+              <div class="form-group mb-3">
+                <input type="email"
+                  class="pb-1 w-full bg-transparent text-white text-lg font-light border-0 border-b border-white focus:border-b focus:outline-0 placeholder-white sd:text-base tablet:text-base"
+                  placeholder="Your Email" />
+              </div>
+              <button
+                class="bg-white hover:bg-white text-orange-10 text-lg font-normal h-12 w-full tracking-wide uppercase">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div
+          class="flex justify-between mt-8 sd:justify-evenly sd:flex-wrap sd:gap-2 sd:text-center tablet:justify-evenly tablet:flex-wrap tablet:gap-2 tablet:text-center">
+          <div>
+            <ul class="m-0 p-0 inline-flex">
+              <li class="mr-3">
+                <a href="" class="text-white font-lg font-light sd:text-sm tablet:text-sm">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="" class="text-white text-sm-15 font-light sd:text-sm tablet:text-sm">Terms and Condition</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-white text-sm-15 font-light  sd:text-sm tablet:text-sm">
+              Copyright © 2022 Mini Dream Party. All Rights Reserved
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alphine JS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script>
+      // Tailwind CSS JS Script
+      tailwind.config = {
+        theme: {
+          extend: {
+            screens: {
+              'sd': { 'max': '600px' },
+              'tablet': { 'min': '768px', 'max': '1023px' },
+              'laptop': { 'min': '1024px', 'max': '1200px' },
+            },
+            colors: {
+              'transparent': "transparent",
+              'primary': "#07617d",
+              'black': {
+                '100': "#000",
+                '200': "#1B1717",
+                '300': "#0000001A",
+              },
+
+              'white': "#fff",
+              'white-100': '#ffffff40',
+              'white-102': '#ffffff96',
+              'orange': {
+                '10': "#f9a828",
+                '20': "#ee971a",
+                '30': "#d17307",
+              },
+              'grayscale': {
+                '10': "#2e383f",
+                '20': "#6e6e6e",
+                '30': "#828282",
+                '40': "#f5f5f5",
+                '50': "#ececeb",
+                '60': "#b9b9b9",
+                '70': "#5c5c5c",
+                '80': "#4f4f4f",
+                '90': "#c4c4c4",
+                '100': "#3d3c3a",
+                '101': '#333333',
+                '102': '#DCDCDC',
+                '103': '#969696',
+              },
+            },
+            height: {
+              '64': "64vh",
+              '65': "65vh",
+              '149': "9.31rem",
+              '72': "72vh",
+              '73': "4.56rem",
+
+            },
+            width: {
+              '70': '70%',
+              '90': '90%',
+              '94': '94%',
+              '198': '12.37rem',
+              '138': '8.62rem',
+              '214': '13.37rem',
+              '249': '15.5rem',
+              '361': '22.56rem',
+              '445': '27.81rem',
+              '1170': '73.12rem',
+            },
+            maxWidth: {
+              'card': '22.56rem',
+              'store-card': '15.43rem',
+            },
+            lineHeight: {
+              '24': "24px",
+              '26': "26px",
+              '40': "40px",
+              '42': "42px",
+              '60': "60px",
+              '65': "65px",
+              '68': "68px",
+              '81': "81px",
+              '90': "90px",
+            },
+            fontFamily: {
+              'inter': ['Inter, '],
+              'opensans': ['"Open Sans", sans-serif'],
+            },
+
+            gridTemplateColumns: {
+              '2': 'repeat(2, minmax(auto, 1fr))',
+              'home2': 'repeat(2, minmax(0, auto))',
+              'contactform': 'repeat(2, minmax(auto, 570px))',
+              'auto1fr': 'repeat(2, minmax(auto, auto))',
+              'cards': 'repeat(2, minmax(0, 361px))',
+              'store': 'repeat(2, minmax(0, auto))',
+              'footer': '430px minmax(0, 1fr) 312px',
+              'footer1': '330px minmax(0, 1fr) 300px',
+            },
+            borderRadius: {
+              '10': '10px',
+              '20': '20px',
+              '30': '30px',
+              '40': '40px',
+            },
+            spacing: {
+              '19': '19px',
+            },
+            fontSize: {
+              '1': ['1px'],
+              '10': ['10px'],
+              'sm-15': ['15px'],
+              'base-17': ['17px'],
+              'lg-4.5': ['45px'],
+              '22': ['1.37rem'],
+              '40': ['40px'],
+              '32': ['32px'],
+            },
+            gap: {
+              '1.6': "1.6rem",
+              '1.8': "1.8rem",
+              '53': "53px",
+            },
+            margin: {
+              '53': '3.31rem',
+              '30px': '1.8rem',
+              '16.5': '4.5rem',
+            },
+            padding: {
+              '17': '4.8rem',
+              '22': '1.37rem',
+              '36': '2.25rem',
+              '38': '2.37rem',
+            },
+            letterSpacing: {
+              '1.8': '0.11rem',
+            },
+            boxShadow: {
+              'box-25': '0 0px 1.56rem rgba(0, 0, 0, 0.102)',
+              'box-30': '0 0 10px rgb(0 0 0 / 19%)',
+            },
+            backgroundImage: {
+              'play-image': "url('./images/services/play-icon.png')",
+            },
+            backdropBlur: {
+              xs: '2px',
+            },
+          },
+        },
+      };
+    </script>
+  </body>
+
+</html>

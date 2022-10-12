@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery - Mini Dream Planner</title>
+
+    <!-- Custom CSS Stylesheet -->
+    <link href="./assets/css/main.css" rel="stylesheet" />
+
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Font Family -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&family=Poppins:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <div class="w-full h-28 flex absolute w-full bg-transparent z-20 border-b border-white-100 sd:h-auto">
+      <div x-data="{ open: false }" class="flex flex-col w-90 mx-auto md:items-center md:justify-between md:flex-row">
+
+        <div class="p-4 sd:px-0 tablet:w-full flex flex-row items-center justify-between tablet:px-0">
+          <a href="/"><img src="/images/logo.png" class="w-32 sd:w-24 tablet:w-24 laptop:w-24" alt="MDP Logo"></a>
+          <button class="lg:hidden rounded-lg relative z-40" @click="open = !open">
+            <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6 text-white">
+              <path x-show="!open" fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                clip-rule="evenodd"></path>
+              <path x-show="open" fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+
+        <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow items-center gap-16 pb-4 
+          sd:absolute sd:justify-center sd:inset-0 sd:gap-3 sd:h-screen sd:z-30 sd:bg-white-102 sd:backdrop-blur-md
+          tablet:absolute tablet:justify-center tablet:inset-0 tablet:gap-3 tablet:h-screen tablet:z-30 tablet:bg-white-102 tablet:backdrop-blur-md
+          laptop:gap-8 md:pb-0 md:flex md:justify-end md:flex-row">
+
+          <a class="text-sm-15 tracking-1.8 py-2 pr-4 pl-3 text-white hover:text-orange-20 duratio-400 md:bg-transparent md:p-0 uppercase sd:font-semibold tablet:font-semibold"
+            href="/">Homepage</a>
+
+          <a class="text-sm-15 tracking-1.8 py-2 pr-4 pl-3 text-white hover:text-orange-20 duratio-400 md:bg-transparent md:p-0 uppercase sd:font-semibold tablet:font-semibold"
+            href="aboutus.html">about us</a>
+
+          <div @click.away="open = false" class="relative" x-data="{ open: false }">
+            <button @click="open = !open"
+              class="flex flex-row items-center w-full text-sm-15 tracking-1.8 py-2 pr-4 pl-3 text-white hover:text-orange-20 duratio-400 md:bg-transparent md:p-0 uppercase sd:font-semibold tablet:font-semibold">
+              <span>our services</span>
+              <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+                class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                <path fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <div x-show="open" x-transition:enter="transition ease-out duration-100"
+              x-transition:enter-start="transform opacity-0 scale-95"
+              x-transition:enter-end="transform opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-75"
+              x-transition:leave-start="transform opacity-100 scale-100"
+              x-transition:leave-end="transform opacity-0 scale-95"
+              class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+              <div class="px-2 py-2 bg-white-100 backdrop-blur-xs rounded-lg shadow dark-mode:bg-gray-800">
+                <a class="block tracking-widest text-white px-4 py-2 mt-2 text-sm-15 rounded font-medium uppercase hover:bg-orange-20 hover:text-white"
+                  href="#">Our Service 1</a>
+                <a class="block tracking-widest text-white px-4 py-2 mt-2 text-sm-15 rounded font-medium uppercase hover:bg-orange-20 hover:text-white"
+                  href="#">Our Service 2</a>
+                <a class="block tracking-widest text-white px-4 py-2 mt-2 text-sm-15 rounded font-medium uppercase hover:bg-orange-20 hover:text-white"
+                  href="#">Our Service 3</a>
+              </div>
+            </div>
+          </div>
+
+          <a class="text-sm-15 tracking-1.8 py-2 pr-4 pl-3 text-white hover:text-orange-20 duratio-400 md:bg-transparent md:p-0 uppercase sd:font-semibold tablet:font-semibold"
+            href="gallery.html">gallery</a>
+
+          <a class=" text-sm bg-gradient-to-r from-orange-20 to-orange-30  tracking-1.8 rounded-40 px-4 py-3.5 hover:bg-transparent text-white uppercase"
+            href="contactus.html">Contact us</a>
+
+        </nav>
+      </div>
+    </div> 
+
+    <!-- Banner -->
+    <div class="bg-cover bg-no-repeat h-64 relative" style="background-image: url('./images/gallery/gallery-bg.png')">
+      <div class="container mx-auto">
+        <div
+          class="w-6/12 sd:w-auto absolute left-14 bottom-24 z-1 sd:bottom-16 sd:left-12 sd:pr-2.5 tablet:bottom-12 laptop:bottom-24">
+          <h1 class="mb-0 text-6xl font-bold text-white tracking-widest uppercase leading-90 mb-1 sd:text-40 sd:leading-42 sd:mb-3
+          tablet:left-8 tablet:text-5xl tablet:pr-8 tablet:leading-60 laptop:text-5xl laptop:leading-60">gallery</h1>
+          <p class="text-white font-extralight text-base-17 tracking-wider mb-0 sd:text-sm">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis,
+            pulvinar dapibus leo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="w-94 mx-auto mt-12">
+      <!-- Tabs -->
+      <ul id="tabs" class="inline-flex flex flex-wrap gap-4 justify-around pt-2 px-1 w-full">
+        <a href="#wedding">
+          <li class="cursor-pointer flex place-items-center justify-center bg-white w-214 h-57 bg-grayscale-50 text-black-400 font-bold tracking-wider py-2 rounded-10 uppercase
+              sd:w-152 sd:text-sm">
+            wedding
+          </li>
+        </a>
+        <a href="#houseparty">
+          <li class="cursor-pointer flex place-items-center justify-center w-214 h-57 bg-grayscale-50 text-black-400 font-bold tracking-wider py-2 rounded-10 uppercase
+              sd:w-152 sd:text-sm">
+            house party
+          </li>
+        </a>
+        <a id="default-tab" href="#events">
+          <li class="cursor-pointer flex place-items-center justify-center w-214 h-57 bg-orange-20 text-white font-bold tracking-wider py-2 rounded-10 uppercase
+              sd:w-152 sd:text-sm">
+            events
+          </li>
+        </a>
+        <a href="#kidsparty">
+          <li class="cursor-pointer flex place-items-center justify-center w-214 h-57 bg-grayscale-50 text-black-400 font-bold tracking-wider py-2 rounded-10 uppercase
+              sd:w-152 sd:text-sm">
+            kids party
+          </li>
+        </a>
+        <a href="#video">
+          <li class="cursor-pointer flex place-items-center justify-center w-214 h-57 bg-grayscale-50 text-black-400 font-bold tracking-wider py-2 rounded-10 uppercase
+              sd:w-152 sd:text-sm">
+            videos
+          </li>
+        </a>
+      </ul>
+
+      <!-- Tab Contents -->
+      <div id="tab-contents">
+        <div id="wedding" class="hidden p-4">
+          <h3 class="text-center">Wedding coming soon</h3>
+        </div>
+        <div id="houseparty" class="hidden p-4">
+          <h3 class="text-center">House Party coming soon</h3>
+        </div>
+        <div id="events" class="py-4">
+          <section class="pt-3 sd:pt-5">
+            <div class="container mx-auto sd:w-90">
+              <div class="homepage-gallery-gridlayout sd:gap-1.5 tablet:gap-3 laptop:gap-3.5 mb-0">
+                <div class="one relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-28"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-one.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="two relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-two.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="three relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-three.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="four relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-four.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="five relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-five.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="six relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-six.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="seven relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-seven.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+
+                <div class="eight relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-eight.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+
+                <div class="nine relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-nine.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="homepage-gallery-gridlayout sd:gap-1.5 tablet:gap-3 laptop:gap-3.5 mb-6 pt-0 tablet:mb-2 laptop:mb-2">
+                <div class="one relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-28"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-one.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="two relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-two.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="three relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-three.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="four relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-four.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="five relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-five.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="six relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-six.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+                <div class="seven relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-seven.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+
+                <div class="eight relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-eight.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+
+                <div class="nine relative group">
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-700 absolute top-3.5 right-4 z-10 flex justify-end items-center gap-4 text-2xl text-white font-bold tracking-wider uppercase">
+                    <span class="cursor-pointer"><i class="fa-regular fa-heart text-32"></i></span>
+                    <span class="cursor-pointer"><img src="./images/svgs/share.svg" class="" alt="shareicon"></span>
+                  </div>
+                  <img src="./images/homepage/gallery-nine.png" class="homepage-gallery-imgs img-fluid cursor:pointer"
+                    alt="gallery Image" />
+                  <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center 
+                    bg-black-400 opacity-0 group-hover:h-full group-hover:opacity-100 duration-300 pb-5">
+                    <p class="text-2xl text-white font-bold tracking-wider uppercase duration-300 mb-0">name of the
+                      event</p>
+                  </div>
+                </div>
+              </div>
+              <div class="my-4 text-center">
+                <a href="#">
+                  <button
+                    class="w-198 h-73 bg-orange-10 border-0 text-white text-base font-bold uppercase tracking-1.8 sd:w-40 tablet:w-44 tablet:h-14 laptop:w-44">see
+                    more</button></a>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="kidsparty" class="hidden p-4">
+          <h3 class="text-center">Kids Party</h3>
+        </div>
+        <div id="video" class="hidden p-4">
+          <h3 class="text-center">Videos</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscribe Section -->
+    <section
+      class="bg-contain bg-no-repeat pt-12 pb-20 sd:bg-cover sd:bg-left tablet:bg-cover tablet:pt-8 tablet:pb-8 laptop:py-8 laptop:pb-16"
+      style="background-image: url('./images/homepage/subscribe-banner.jpg')">
+      <div class="container mx-auto laptop:w-90">
+        <div
+          class="grid grid-cols-contactform sd:grid-cols-1 sd:gap-4 tablet:grid-cols-1 tablet:gap-4 justify-center laptop:gap-12">
+          <div class="pt-5 sd:px-5 sd:py-0 tablet:pl-12">
+            <h2 class="text-5xl font-bold tracking-wider leading-68 uppercase font-bold text-black-200 mb-5 
+              sd:text-32 sd:leading-42 
+              tablet:text-40 tablet:leading-60
+              laptop:text-lg-4.5">
+              Have a project! <br />
+              Let’s discuss
+            </h2>
+            <p class="text-grayscale-20 text-base font-light mb-4 mt-2">
+              Thank you for getting in touch! <br />
+              Kindly. <br />
+              Fill the form, have a great day!
+            </p>
+            <div class="mt-7">
+              <p class="text-grayscale-101 text-base font-light mb-3">
+                <i class="fa-solid fa-location-dot text-base"></i>
+                &nbsp;&nbsp;&nbsp;Lumbung Hidup East Java
+              </p>
+              <p class="text-grayscale-101 text-base font-light mb-5">
+                <i class="fa-solid fa-envelope text-base"></i>
+                <a href="mailto:Hello@minidreamparty.com">&nbsp;&nbsp;Hello@minidreamparty.com</a>
+              </p>
+            </div>
+          </div>
+          <div class="pt-5 sd:px-5 tablet:px-5">
+            <form>
+              <div class="grid grid-cols-2 gap-y-10 gap-x-1.8 mb-10">
+                <div>
+                  <input type="text" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Your Name*" />
+                </div>
+                <div>
+                  <input type="email" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Your Email*" />
+                </div>
+                <div>
+                  <input type="text" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Phone Number*" />
+                </div>
+                <div>
+                  <select class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base">
+                    <option selected disabled>Event Type*</option>
+                    <option value="">Event Type 1</option>
+                    <option value="">Event Type 2</option>
+                    <option value="">Event Type 3</option>
+                    <option value="">Event Type 4</option>
+                    <option value="">Event Type 5</option>
+                  </select>
+                </div>
+                <div>
+                  <input type="text" placeholder="Event Date*" class="pb-1 w-full pointer bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 
+                    sd:text-base tablet:text-base laptop:text-base" onfocus="(this.type='date')" id="date" />
+                </div>
+                <div>
+                  <input type="text" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Venue Location" />
+                </div>
+                <div>
+                  <input type="text" class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base" placeholder="Your Address*" />
+                </div>
+                <div>
+                  <select class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                    sd:text-base tablet:text-base laptop:text-base">
+                    <option selected disabled>Budget*</option>
+                    <option value="">Budget 1</option>
+                    <option value="">Budget 2</option>
+                    <option value="">Budget 3</option>
+                    <option value="">Budget 4</option>
+                    <option value="">Budget 5</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <textarea class="pb-1 w-full bg-transparent text-grayscale-80 text-lg font-light border-0 border-b border-grayscale-90 focus:border-b focus:outline-0 placeholder-grayscale-80 rounded-none 
+                  sd:text-base tablet:text-base laptop:text-base" rows="1" placeholder="Message*"></textarea>
+              </div>
+
+              <div class="text-right mt-5">
+                <button
+                  class="w-249 bg-orange-10 border-0 uppercase bg-orange-10 h-11 text-white tracking-wider font-semibold">
+                  submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-orange-10 pt-12 pb-5 sd:px-5 sd:pt-10 sd:pb-5 tablet:px-5 tablet:pt-10 tablet:pb-5">
+      <div class="container mx-auto laptop:w-90">
+        <div
+          class="grid grid-cols-footer gap-5 sd:grid-cols-1 tablet:grid-cols-2 tablet:gap-y-12 laptop:gap-0 laptop:grid-cols-footer1">
+          <div>
+            <a href="/">
+              <img src="./images/logo.png" class="w-28 h-auto mb-2" alt="Logo" />
+            </a>
+            <p class="text-white pt-3.5 text-base-17 font-light sd:text-base tablet:text-base laptop:text-base">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea
+              dignissimos cumque maxime, vitae iusto debitis.
+            </p>
+            <ul class="inline-flex list-none p-0 mt-5">
+              <li class="mr-3">
+                <a href="" class="text-white text-3xl">
+                  <i class="fa-brands fa-square-facebook social-icons-img"></i></a>
+              </li>
+              <li class="mr-3">
+                <a href="" class="text-white text-3xl"><i class="fa-brands fa-square-twitter social-icons-img"></i></a>
+              </li>
+              <li class="mr-3">
+                <a href="" class="text-white text-3xl"><i
+                    class="fa-brands fa-square-instagram social-icons-img"></i></a>
+              </li>
+              <li>
+                <a href="" class="text-white text-3xl"><i class="fa-brands fa-linkedin social-icons-img"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="pl-12 sd:pl-0">
+            <h3 class="uppercase text-2xl font-extrabold tracking-wider text-white mb-5 sd:pt-4">
+              Navigation
+            </h3>
+            <ul class="footer-inner-ul ml-2">
+              <li class="mb-4 pl-3">
+                <a class="text-white text-base-17 font-light sd:text-base tablet:text-base" href="/">Homepage</a>
+              </li>
+              <li class="mb-4 pl-3">
+                <a class="text-white text-base-17 font-light sd:text-base tablet:text-base" href="aboutus.html">About
+                  Us</a>
+              </li>
+              <li class="mb-4 pl-3">
+                <a class="text-white text-base-17 font-light sd:text-base tablet:text-base"
+                  href="services.html">Services</a>
+              </li>
+              <li class="mb-4 pl-3">
+                <a class="text-white text-base-17 font-light sd:text-base tablet:text-base"
+                  href="gallery.html">Gallery</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="uppercase text-2xl font-extrabold tracking-wider text-white mb-5">
+              Contact Us
+            </h3>
+            <p class="text-white text-base-17 font-light mb-2 sd:text-base tablet:text-base">
+              <i class="fa-solid fa-location-dot text-base"></i>
+              &nbsp;&nbsp;&nbsp;Lumbung Hidup East Java
+            </p>
+            <p class="text-white text-base-17 font-light mb-5 sd:text-base tablet:text-base">
+              <i class="fa-solid fa-envelope text-base"></i>
+              <a href="mailto:Hello@minidreamparty.com">&nbsp;&nbsp;Hello@minidreamparty.com</a>
+            </p>
+
+            <form class="subscribe-form">
+              <div class="form-group mb-3">
+                <input type="email"
+                  class="pb-1 w-full bg-transparent text-white text-lg font-light border-0 border-b border-white focus:border-b focus:outline-0 placeholder-white sd:text-base tablet:text-base"
+                  placeholder="Your Email" />
+              </div>
+              <button
+                class="bg-white hover:bg-white text-orange-10 text-lg font-normal h-12 w-full tracking-wide uppercase">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div
+          class="flex justify-between mt-8 sd:justify-evenly sd:flex-wrap sd:gap-2 sd:text-center tablet:justify-evenly tablet:flex-wrap tablet:gap-2 tablet:text-center">
+          <div>
+            <ul class="m-0 p-0 inline-flex">
+              <li class="mr-3">
+                <a href="" class="text-white font-lg font-light sd:text-sm tablet:text-sm">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="" class="text-white text-sm-15 font-light sd:text-sm tablet:text-sm">Terms and Condition</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-white text-sm-15 font-light  sd:text-sm tablet:text-sm">
+              Copyright © 2022 Mini Dream Party. All Rights Reserved
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Alphine JS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    <!-- Gallery Navtabs -->
+    <script>
+      let tabsContainer = document.querySelector("#tabs");
+      let tabTogglers = tabsContainer.querySelectorAll("#tabs a");
+      console.log(tabTogglers);
+      tabTogglers.forEach(function (toggler) {
+        toggler.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          let tabName = this.getAttribute("href");
+          let tabContents = document.querySelector("#tab-contents");
+          for (let i = 0; i < tabContents.children.length; i++) {
+            tabTogglers[i].parentElement.classList.remove("border-0", "border-0", "border-0", "rounded-0");
+            tabContents.children[i].classList.remove("hidden");
+            if ("#" + tabContents.children[i].id === tabName) {
+              continue;
+            }
+            tabContents.children[i].classList.add("hidden");
+          }
+          e.target.parentElement.classList.add("border-0", "border-0", "border-0", "rounded-10");
+        });
+      });
+
+    </script>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      // Tailwind CSS JS Script
+      tailwind.config = {
+        theme: {
+          extend: {
+            screens: {
+              'sd': { 'max': '600px' },
+              'tablet': { 'min': '768px', 'max': '1023px' },
+              'laptop': { 'min': '1024px', 'max': '1200px' },
+            },
+            colors: {
+              'transparent': "transparent",
+              'primary': "#07617d",
+              'black': {
+                '100': "#000",
+                '200': "#1B1717",
+                '300': "#0000001A",
+                '400': "#000000B3",
+              },
+              'white': "#fff",
+              'white-100': '#ffffff40',
+              'white-102': '#ffffff96',
+              'orange': {
+                '10': "#f9a828",
+                '20': "#ee971a",
+                '30': "#d17307",
+              },
+              'grayscale': {
+                '10': "#2e383f",
+                '20': "#6e6e6e",
+                '30': "#828282",
+                '40': "#f5f5f5",
+                '50': "#ececeb",
+                '60': "#b9b9b9",
+                '70': "#5c5c5c",
+                '80': "#4f4f4f",
+                '90': "#c4c4c4",
+                '100': "#3d3c3a",
+                '101': '#333333',
+                '102': '#c1c1c14d',
+              },
+            },
+            height: {
+              '64': "64vh",
+              '57': '57px',
+              '65': "65vh",
+              '149': "9.31rem",
+              '72': "72vh",
+              '73': "4.56rem",
+            },
+            width: {
+              '70': '70%',
+              '90': '90%',
+              '94': '94%',
+              '98': '98%',
+              '138': '8.62rem',
+              '152': '9.5rem',
+              '198': '12.37rem',
+              '214': '13.37rem',
+              '249': '15.5rem',
+              '361': '22.56rem',
+              '445': '27.81rem',
+              '1170': '73.12rem',
+            },
+            maxWidth: {
+              'card': '22.56rem',
+            },
+            lineHeight: {
+              '24': "24px",
+              '26': "26px",
+              '40': "40px",
+              '42': "42px",
+              '50': "50px",
+              '56': "56px",
+              '60': "60px",
+              '65': "65px",
+              '68': "68px",
+              '81': "81px",
+              '90': "90px",
+            },
+            fontFamily: {
+              'inter': ['Inter, '],
+              'opensans': ['"Open Sans", sans-serif'],
+            },
+
+            gridTemplateColumns: {
+              '2': 'repeat(2, minmax(auto, 1fr))',
+              'home2': 'repeat(2, minmax(0, auto))',
+              'contactform': 'repeat(2, minmax(auto, 570px))',
+              'auto1fr': 'repeat(2, minmax(auto, auto))',
+              'cards': 'repeat(2, minmax(0, 361px))',
+              'footer': '430px minmax(0, 1fr) 312px',
+              'footer1': '330px minmax(0, 1fr) 300px',
+            },
+            borderRadius: {
+              '10': '10px',
+              '20': '20px',
+              '30': '30px',
+              '40': '40px',
+            },
+            spacing: {
+              '19': '19px',
+            },
+            fontSize: {
+              '1': ['1px'],
+              'sm-15': ['15px'],
+              'base-17': ['17px'],
+              'lg-4.5': ['45px'],
+              '40': ['40px'],
+              '32': ['32px'],
+              '28': ['28px'],
+            },
+            gap: {
+              '1.6': "1.6rem",
+              '1.8': "1.8rem",
+              '53': "53px",
+            },
+            margin: {
+              '53': '3.31rem',
+              '30px': '1.8rem',
+              '16.5': '4.5rem',
+            },
+            padding: {
+              '17': '4.8rem',
+              '36': '2.25rem',
+              '38': '2.37rem',
+            },
+            letterSpacing: {
+              '1.8': '0.11rem',
+            },
+            boxShadow: {
+              'box-25': '0 0px 1.56rem rgba(0, 0, 0, 0.102)',
+            },
+            backgroundImage: {
+              'play-image': "url('./images/services/play-icon.png')",
+            },
+            backdropBlur: {
+              xs: '2px',
+            },
+            translate: {
+              'minus50': '-50%',
+            },
+          },
+        },
+      };
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Inter" sans-serif;
+  }
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+}
+
+.footer-inner-ul {
+  li {
+    &::marker {
+      content: url("../../images/svgs/right-arrow.svg");
+    }
+  }
+}
+
+.whoweare-ul {
+  li {
+    &::marker {
+      content: url("../../images/svgs/correct.svg");
+    }
+  }
+}
+
+.subscribe-form {
+  &input {
+    &::placeholder {
+      @apply text-white;
+    }
+  }
+}
+
+.stats-ul {
+  li {
+    &::before {
+      -webkit-mask-image: url("../../images/svgs/correct.svg");
+      -webkit-mask-size: cover;
+    }
+  }
+}
+
+.store-cards {
+  &::before {
+    background-image: url("../../images/svgs/share-icon.svg");
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .slick-next {
+    right: 15px !important;
+  }
+  .slick-prev {
+    left: 15px !important;
+  }
+}
+
+// Gallery Section
+.homepage-gallery {
+  &-section {
+    padding: 40px 0;
+  }
+
+  &-title {
+    color: var(--black);
+    font-size: 45px;
+    text-align: center;
+    width: 70%;
+    margin: 0 auto 20px;
+    line-height: 68px;
+    text-transform: uppercase;
+    letter-spacing: 6.3px;
+  }
+
+  &-imgs {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-gridlayout {
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-gap: 1.4rem;
+
+    .one {
+      grid-column: 1/3;
+      grid-row: 1/2;
+    }
+    .two {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+    .three {
+      grid-column: 2/3;
+      grid-row: 2/4;
+    }
+    .four {
+      grid-column: 1/2;
+      grid-row: 3/4;
+    }
+    .five {
+      grid-column: 3/4;
+      grid-row: 1/2;
+    }
+    .six {
+      grid-column: 4/5;
+      grid-row: 1/2;
+    }
+    .seven {
+      grid-column: 3/5;
+      grid-row: 2/3;
+    }
+    .eight {
+      grid-column: 3/4;
+      grid-row: 3/4;
+    }
+    .nine {
+      grid-column: 4/5;
+      grid-row: 3/4;
+      position: relative;
+    }
+    .btn-viewmore {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      letter-spacing: 2px;
+      font-size: 20px;
+      color: var(--white);
+      font-weight: 500;
+      border: none;
+      background-color: transparent;
+    }
+  }
+
+  &-nav-pills {
+    display: flex;
+    justify-content: space-between;
+
+    .nav-link {
+      color: var(--black);
+      background-color: var(--bgcolor);
+      font-size: 15px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      width: 214px;
+      height: 57px;
+
+      &.active {
+        background-color: var(--secondary);
+        color: var(--white);
+      }
+    }
+  }
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content-s {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.tab-content-s.active {
+  display: block;
+  color: #ffffff 25%;
+}
+
+@media (min-width: 320px) and (max-width: 600px) {
+  .homepage-gallery {
+    &-gridlayout {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(11, auto);
+
+      .one {
+        grid-column: 1/2;
+        grid-row: 1/2;
+      }
+      .two {
+        grid-column: 1/2;
+        grid-row: 2/3;
+      }
+      .three {
+        grid-column: 1/2;
+        grid-row: 3/4;
+      }
+      .four {
+        grid-column: 1/2;
+        grid-row: 4/5;
+      }
+      .five {
+        grid-column: 1/2;
+        grid-row: 5/6;
+      }
+      .six {
+        grid-column: 1/2;
+        grid-row: 6/7;
+      }
+      .seven {
+        grid-column: 1/2;
+        grid-row: 7/8;
+      }
+      .eight {
+        grid-column: 1/2;
+        grid-row: 8/9;
+      }
+      .nine {
+        grid-column: 1/2;
+        grid-row: 9/10;
+        position: relative;
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+}
