@@ -23,9 +23,9 @@
 
     <!-- Navbar -->
     <div class="w-full h-28 flex absolute w-full bg-transparent z-20 border-b border-white-100 sd:h-auto">
-      <div x-data="{ open: false }" class="flex flex-col w-90 mx-auto md:items-center md:justify-between md:flex-row">
+      <div x-data="{ open: false }" class="flex flex-col container mx-auto md:items-center md:justify-between md:flex-row">
 
-        <div class="p-4 sd:px-0 tablet:w-full flex flex-row items-center justify-between tablet:px-0">
+        <div class="py-4 sd:px-0 tablet:w-full flex flex-row items-center justify-between tablet:px-0">
           <a href="/"><img src="../images/logo.png" class="w-32 sd:w-24 tablet:w-24 laptop:w-24" alt="MDP Logo"></a>
           <button class="lg:hidden rounded-lg relative z-40" @click="open = !open">
             <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6 text-white">
@@ -164,7 +164,7 @@
       </div>
     </section>
     <!-- Gallery Section -->
-    <div class="container mx-auto sd:w-90 tablet:w-90 laptop:w-90">
+    <div class="container mx-auto">
       <div class="pb-4 rounded-lg" id="events" role="tabpanel" aria-labelledby="events-tab">
         <p class="text-sm text-gray-500 dark:text-gray-400">
         <div class="homepage-gallery-gridlayout">
@@ -205,7 +205,7 @@
     <!-- Subscribe Section -->
     <section class="bg-contain bg-no-repeat pt-12 pb-20 sd:bg-cover sd:bg-left tablet:bg-cover laptop:py-8 laptop:pb-16"
       style="background-image: url('./images/homepage/subscribe-banner.jpg')">
-      <div class="container mx-auto laptop:w-90">
+      <div class="container mx-auto">
         <div
           class="grid grid-cols-contactform sd:grid-cols-1 sd:gap-4 tablet:grid-cols-1 tablet:gap-4 justify-center laptop:gap-12">
           <div class="pt-5 sd:px-5 sd:py-0 tablet:pl-12">
@@ -301,7 +301,7 @@
 
     <!-- Footer -->
     <footer class="bg-orange-10 pt-12 pb-5 sd:px-5 sd:pt-10 sd:pb-5 tablet:px-5 tablet:pt-10 tablet:pb-5">
-      <div class="container mx-auto laptop:w-90">
+      <div class="container mx-auto">
         <div
           class="grid grid-cols-footer gap-5 sd:grid-cols-1 tablet:grid-cols-2 tablet:gap-y-12 laptop:gap-0 laptop:grid-cols-footer1">
           <div>
@@ -412,6 +412,7 @@
               'sd': { 'max': '460px' },
               'tablet': { 'min': '768px', 'max': '1023px' },
               'laptop': { 'min': '1024px', 'max': '1200px' },
+'container-2xl': { 'min': '1536px'}
             },
             colors: {
               'transparent': "transparent",
@@ -445,8 +446,8 @@
               },
             },
             height: {
-              '64': "64vh",
-              '65': "65vh",
+              '58': "58vh",
+              '64': "64vh",              '65': "65vh",
               '149': "9.31rem",
               '72': "72vh",
 
